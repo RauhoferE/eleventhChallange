@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'; // darauf achten das EventEmitter importiert wird
+import { DataLoaderService } from '../services/data-loader.service';
 
 @Component({
   selector: 'app-name-input',
@@ -8,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core'; // dara
 export class NameInputComponent implements OnInit {
   name: string;
   @Output() nameChanged = new EventEmitter<string>();//Events um sachen rauszugeben
-  constructor() { 
+  constructor(private dataLoader: DataLoaderService) { // Den service über dependency injection hinzufügen
 
   }
 
@@ -21,6 +22,8 @@ export class NameInputComponent implements OnInit {
     this.nameChanged.emit(this.name); // Hier wird event gefeuert
   }
   load(){
-    
+    this.dataLoader.load().subscribe(data => {
+      this.name = data["data"];
+    });// Hier auf event subscriben
   }
 }
