@@ -1,4 +1,4 @@
 <router-outlet></router-outlet>
-<app-name-input></app-name-input>
-<app-output></app-output>
+<app-name-input (nameChanged)="name = $event"></app-name-input>
+<app-output [name]="name"></app-output>
 <!-- Hier web components einfügen name ist in der ts von der Komponente-->

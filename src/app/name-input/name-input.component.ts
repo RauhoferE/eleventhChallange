@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'; // darauf achten das EventEmitter importiert wird
 
 @Component({
   selector: 'app-name-input',
@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./name-input.component.scss']
 })
 export class NameInputComponent implements OnInit {
+  name: string;
+  @Output() nameChanged = new EventEmitter<string>();//Events um sachen rauszugeben
+  constructor() { 
 
-  constructor() { }
-
-  ngOnInit() {
   }
 
+  ngOnInit() {
+    this.name = "Enter name";
+  }
+  writeToConsole()
+  {
+    console.log("test");
+    this.nameChanged.emit(this.name); // Hier wird event gefeuert
+  }
+  load(){
+    
+  }
 }
